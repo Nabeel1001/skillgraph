@@ -16,8 +16,8 @@ app.include_router(graph_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://skillgraph-8bu8d8n9a-nabeel17.vercel.app",
         "http://localhost:5173",
+        "https://skillgraph-two.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
