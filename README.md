@@ -309,19 +309,6 @@ This creates:
 
 ---
 
-# 📸 Screenshots
-
-## Dashboard
-
-> Add screenshot here
-
----
-
-## Graph Visualization
-
-> Add screenshot here
-
----
 
 # Future Improvements
 
