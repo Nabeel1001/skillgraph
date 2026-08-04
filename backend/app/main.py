@@ -12,12 +12,10 @@ app.include_router(people_router)
 app.include_router(dashboard_router)
 app.include_router(company_router)
 app.include_router(graph_router)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://skillgraph-two.vercel.app",
-    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
