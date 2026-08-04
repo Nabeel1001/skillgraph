@@ -343,8 +343,7 @@ GitHub:
 https://github.com/Nabeel1001
 
 LinkedIn:
-https://www.linkedin.com/in/nabeel-abdul-aziz-khan/
-
+https://www.linkedin.com/in/nabeelkhantechsavvy/
 ---
 
 # License
