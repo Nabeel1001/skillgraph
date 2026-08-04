@@ -1,75 +1,365 @@
-# React + TypeScript + Vite
+# 🚀 SkillGraph
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack graph-based professional network explorer built using **React**, **FastAPI**, and **CognoDB**. SkillGraph demonstrates how graph databases efficiently model and visualize relationships between professionals, companies, skills, and locations.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 Overview
 
-## React Compiler
+Traditional relational databases struggle with highly connected data. SkillGraph leverages a **graph database** to efficiently model relationships and perform graph traversals such as exploring professional networks.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The application allows users to:
 
-## Expanding the ESLint configuration
+- Browse professionals
+- Search professionals
+- View professional profiles
+- Visualize connections using an interactive graph
+- Explore relationships between people, companies, and skills
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Dashboard
+- Display total People
+- Display total Companies
+- Display total Skills
+- Display total Relationships
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Professional Directory
+- Browse all professionals
+- Search professionals by name
 
-```
+### Interactive Graph Visualization
+- Explore professional connections
+- View companies
+- View technical skills
+- View professional network
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Graph Database
+- Person → Company
+- Person → Skill
+- Person → Person
+- Company → Location
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 🏗 Architecture
 
 ```
+                    React + TypeScript
+                            │
+                      Axios REST API
+                            │
+                    FastAPI Backend
+                            │
+                  Graph Service Layer
+                            │
+                        CognoDB
+```
+
+---
+
+# 🗂 Project Structure
+
+```
+skillgraph/
+
+├── backend/
+│
+│   ├── app/
+│   │
+│   ├── routes/
+│   │     ├── people.py
+│   │     ├── dashboard.py
+│   │     ├── companies.py
+│   │     └── graph.py
+│   │
+│   ├── services/
+│   │     ├── person_service.py
+│   │     ├── dashboard_service.py
+│   │     ├── company_service.py
+│   │     ├── graph_service.py
+│   │     ├── recommendation_service.py
+│   │     └── path_service.py
+│   │
+│   ├── db/
+│   ├── seed/
+│   └── main.py
+│
+└── frontend/
+    ├── src/
+    │
+    ├── components/
+    ├── pages/
+    ├── services/
+    ├── types/
+    └── App.tsx
+```
+
+---
+
+# 📊 Graph Schema
+
+```
+(Person)-[:WORKS_AT]->(Company)
+
+(Person)-[:HAS_SKILL]->(Skill)
+
+(Person)-[:KNOWS]->(Person)
+
+(Company)-[:LOCATED_IN]->(Location)
+```
+
+---
+
+# 🧠 Why Graph Database?
+
+The application models highly connected data.
+
+Examples:
+
+- Which company does a person work at?
+- What skills does a person have?
+- Who does this person know?
+- Which company is located in which city?
+
+These relationships are naturally represented as a graph.
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React
+- TypeScript
+- Tailwind CSS
+- Axios
+- Cytoscape.js
+- TanStack React Query
+- Vite
+
+---
+
+## Backend
+
+- FastAPI
+- Python
+- CognoDB
+- Pydantic
+- Faker
+
+---
+
+# 📡 API Endpoints
+
+## Dashboard
+
+```
+GET /dashboard/stats
+```
+
+Returns dashboard statistics.
+
+---
+
+## People
+
+```
+GET /people
+```
+
+Returns all professionals.
+
+---
+
+```
+GET /people/{id}
+```
+
+Returns a professional profile.
+
+---
+
+## Companies
+
+```
+GET /companies
+```
+
+Returns all companies.
+
+---
+
+## Graph
+
+```
+GET /graph/person/{id}
+```
+
+Returns graph nodes and edges for Cytoscape visualization.
+
+---
+
+# 🌐 Graph Response Example
+
+```json
+{
+  "nodes": [
+    {
+      "data": {
+        "id": "person_1",
+        "label": "John Doe",
+        "type": "Person"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "data": {
+        "source": "person_1",
+        "target": "company_1",
+        "label": "WORKS_AT"
+      }
+    }
+  ]
+}
+```
+
+---
+
+# 🚀 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/skillgraph.git
+
+cd skillgraph
+```
+
+---
+
+## Backend
+
+```bash
+cd backend
+
+python -m venv .venv
+
+source .venv/bin/activate
+```
+
+Windows
+
+```cmd
+.venv\Scripts\activate
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Create `.env`
+
+```env
+COGNODB_URI=YOUR_DATABASE_URI
+COGNODB_USERNAME=YOUR_USERNAME
+COGNODB_PASSWORD=YOUR_PASSWORD
+```
+
+Run backend
+
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+## Frontend
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+---
+
+# 🧪 Seed Database
+
+Generate sample graph data.
+
+```bash
+python -m app.seed.seed_data
+```
+
+This creates:
+
+- Companies
+- Locations
+- Skills
+- People
+- Relationships
+
+---
+
+# 📸 Screenshots
+
+## Dashboard
+
+> Add screenshot here
+
+---
+
+## Graph Visualization
+
+> Add screenshot here
+
+---
+
+# Future Improvements
+
+- Shortest path between professionals
+- Professional recommendations
+- Skill-based filtering
+- Expandable graph nodes
+- Multi-hop graph traversal
+- Graph analytics
+- Responsive mobile interface
+
+---
+
+# Key Learnings
+
+This project demonstrates:
+
+- Graph database modeling
+- FastAPI REST API development
+- React with TypeScript
+- Cytoscape.js graph visualization
+- Full-stack application architecture
+- Graph-based relationship traversal
+
+---
+
+# Author
+
+**Nabeel Abdul Aziz Khan**
+
+GitHub:
+https://github.com/Nabeel1001
+
+LinkedIn:
+https://www.linkedin.com/in/nabeel-abdul-aziz-khan/
+
+---
+
+# License
+
+This project was developed as part of a technical assignment and is intended for educational and evaluation purposes.
