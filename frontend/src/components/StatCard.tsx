@@ -11,8 +11,12 @@ export default function StatCard({ title, value, isLoading }: Props) {
                 {title}
             </p>
 
-            <h2 className="mt-2 text-3xl font-bold text-white">
-                {isLoading ? "Loading..." : value}
+            <h2 className="mt-2">
+                {isLoading ? (
+                    <div className="h-8 w-20 animate-pulse rounded bg-zinc-700/70" />
+                ) : (
+                    <span className="text-3xl font-bold text-white">{value}</span>
+                )}
             </h2>
         </div>
     );
