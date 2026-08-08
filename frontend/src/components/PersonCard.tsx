@@ -29,3 +29,23 @@ export default function PersonCard({ person, onExplore }: Props) {
         </div>
     );
 }
+export  function PersonCardSkeleton() {
+    return (
+        <div className="animate-pulse rounded-xl border border-zinc-800 bg-zinc-900 p-6">
+            {/* Avatar */}
+            <div className="h-12 w-12 rounded-full bg-zinc-800" />
+
+            {/* Name */}
+            <div className="mt-4 h-6 w-40 rounded bg-zinc-800" />
+
+            {/* Title */}
+            <div className="mt-3 h-4 w-32 rounded bg-zinc-800" />
+
+            {/* Email */}
+            <div className="mt-2 h-4 w-52 rounded bg-zinc-800" />
+
+            {/* Button */}
+            <div className="mt-6 h-10 w-full rounded-lg bg-zinc-800" />
+        </div>
+    );
+}

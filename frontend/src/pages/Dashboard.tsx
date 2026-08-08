@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
 import StatCard from "../components/StatCard";
-import PersonCard from "../components/PersonCard";
+import PersonCard, { PersonCardSkeleton } from "../components/PersonCard";
 import GraphModal from "../components/graph/GraphModal";
 
 import {
@@ -27,7 +27,7 @@ export default function Dashboard() {
         queryFn: getDashboardStats,
     });
 
-    const { data: people = [] } = useQuery<Person[]>({
+    const { data: people = [], isLoading: isPeopleLoading } = useQuery<Person[]>({
         queryKey: ["people"],
         queryFn: getPeople,
     });
@@ -96,7 +96,11 @@ export default function Dashboard() {
                 {/* People */}
 
                 <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                    {filteredPeople.length > 0 ? (
+                    {isPeopleLoading ? (
+                        Array.from({ length: 6 }).map((_, index) => (
+                            <PersonCardSkeleton key={index} />
+                        ))
+                    ) : filteredPeople.length > 0 ? (
                         filteredPeople.map((person) => (
                             <PersonCard
                                 key={person.id}
