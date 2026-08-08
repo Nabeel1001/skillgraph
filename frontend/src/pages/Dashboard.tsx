@@ -22,7 +22,7 @@ export default function Dashboard() {
     const [graph, setGraph] = useState<GraphData | null>(null);
     const [graphOpen, setGraphOpen] = useState(false);
 
-    const { data: stats } = useQuery<DashboardStats>({
+    const { data: stats, isLoading: isStatsLoading } = useQuery<DashboardStats>({
         queryKey: ["stats"],
         queryFn: getDashboardStats,
     });
@@ -60,21 +60,25 @@ export default function Dashboard() {
                     <StatCard
                         title="People"
                         value={stats?.people ?? 0}
+                        isLoading={isStatsLoading}
                     />
 
                     <StatCard
                         title="Companies"
                         value={stats?.companies ?? 0}
+                        isLoading={isStatsLoading}
                     />
 
                     <StatCard
                         title="Skills"
                         value={stats?.skills ?? 0}
+                        isLoading={isStatsLoading}
                     />
 
                     <StatCard
                         title="Relationships"
                         value={stats?.relationships ?? 0}
+                        isLoading={isStatsLoading}
                     />
                 </div>
 
